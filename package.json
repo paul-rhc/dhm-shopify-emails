@@ -1,0 +1,23 @@
+{
+  "name": "dhm-shopify-emails",
+  "version": "1.0.0",
+  "description": "Modular email template system for DirectHomeMedical Shopify transactional emails",
+  "main": "build.js",
+  "scripts": {
+    "build": "node build.js",
+    "watch": "node build.js --watch",
+    "test-email": "node test-mailtrap.js"
+  },
+  "keywords": [
+    "email",
+    "templates",
+    "shopify",
+    "transactional"
+  ],
+  "author": "DirectHomeMedical",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "nodemailer": "^7.0.10"
+  }
+}

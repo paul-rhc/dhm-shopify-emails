@@ -483,19 +483,19 @@
                         width="100%"
                         cellpadding="0"
                         cellspacing="0"
-                        align="center"
+                        align="left"
                         style="min-width: 100%; direction: ltr"
                         role="presentation"
                         bgcolor="#e7fed0"
                       >
                         <tr>
-                          <td class="" style="mso-line-height-rule: exactly" bgcolor="#e7fed0">
+                          <th class="" style="mso-line-height-rule: exactly" bgcolor="#e7fed0">
                             <table
                               border="0"
                               width="100%"
                               cellpadding="0"
                               cellspacing="0"
-                              align="center"
+                              align="left"
                               style="min-width: 100%; direction: ltr"
                               role="presentation"
                             >
@@ -510,7 +510,7 @@
                                     width="100%"
                                     cellpadding="0"
                                     cellspacing="0"
-                                    align="center"
+                                    align="left"
                                     style="min-width: 100%; direction: ltr"
                                     role="presentation"
                                   >
@@ -518,7 +518,7 @@
                                       <th
                                         class="column_logo section_content"
                                         style="mso-line-height-rule: exactly; padding: 0px 30px"
-                                        align="center"
+                                        align="left"
                                         bgcolor="#e7fed0"
                                       >
                                         <!-- Logo : BEGIN -->
@@ -530,14 +530,14 @@
                                         >
                                           <img
                                             src="{{shop.email_logo_url}}"
-                                            class="logo logo-center logo-mobile-center"
+                                            class="logo logo-left logo-mobile-left"
                                             width="300"
                                             border="0"
                                             style="
                                               width: 240px;
                                               height: auto !important;
                                               display: block;
-                                              margin: 0 auto;
+                                              margin: 0;
                                             "
                                           />
                                         </a>
@@ -548,7 +548,7 @@
                                 </th>
                               </tr>
                             </table>
-                          </td>
+                          </th>
                         </tr>
                       </table>
                       <!-- END : SECTION : HEADER -->
@@ -605,7 +605,7 @@
                         bgcolor="#ffffff"
                       >
                         <tr>
-                          <td class="" style="mso-line-height-rule: exactly" bgcolor="#ffffff">
+                          <th class="" style="mso-line-height-rule: exactly" bgcolor="#ffffff">
                             <table
                               border="0"
                               width="100%"
@@ -1260,6 +1260,23 @@
                                                                 color: #666666;
                                                               "
                                                               >{{ original_item.product.metafields.custom.dhm_promos_warranty | metafield_text }}</span
+                                                            >
+                                                            {% endif %}
+                                                            {% if custom.dhm_general_hcpcs_code != blank %}
+<br />
+                                                            <span
+                                                              class="muted"
+                                                              style="
+                                                                text-align: left;
+                                                                direction: ltr;
+                                                                font-family: Verdana, san-serif, 'Montserrat';
+                                                                font-size: 14px;
+                                                                line-height: 30px;
+                                                                font-weight: normal;
+                                                                text-transform: none;
+                                                                color: #666666;
+                                                              "
+                                                              >HCPCS Code: {{ original_item.product.metafields.custom..dhm_general_hcpcs_code }}</span
                                                             >
                                                             {% endif %}
                                                             {% if original_item.selling_plan_allocation !=
@@ -4058,7 +4075,7 @@ We process and ship most orders the same day so you'll want to call 888-505-0212
                               </tr>
                               <!-- Menu heading : END -->
                               <tr data-id="link-list" class="section">
-                                <td
+                                <th
                                   class="menu_bar menu_bar_6"
                                   style="mso-line-height-rule: exactly; padding: 30px 0"
                                   bgcolor="#ffffff"
@@ -4195,10 +4212,10 @@ We process and ship most orders the same day so you'll want to call 888-505-0212
                                       </th>
                                     </tr>
                                   </table>
-                                </td>
+                                </th>
                               </tr>
                             </table>
-                          </td>
+                          </th>
                         </tr>
                       </table>
                       <!-- END : SECTION : MAIN -->
@@ -4262,7 +4279,7 @@ We process and ship most orders the same day so you'll want to call 888-505-0212
                         bgcolor="#f3f3f3"
                       >
                         <tr>
-                          <td
+                          <th
                             class="section_border"
                             style="mso-line-height-rule: exactly; padding: 45px 30px 30px"
                             bgcolor="#f3f3f3"
@@ -4342,7 +4359,7 @@ We process and ship most orders the same day so you'll want to call 888-505-0212
                                 </th>
                               </tr>
                             </table>
-                          </td>
+                          </th>
                         </tr>
                       </table>
                       <!-- END : SECTION : FOOTER -->

@@ -1,0 +1,21 @@
+# Compiled templates
+dist/
+
+# Node modules (if we add dependencies later)
+node_modules/
+
+# Environment variables (contains Mailtrap credentials)
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/*
+!.vscode/settings.json
+.idea/
+
+# Logs
+*.log
+npm-debug.log*

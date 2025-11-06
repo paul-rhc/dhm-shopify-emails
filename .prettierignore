@@ -1,0 +1,3 @@
+# Email HTML templates intentionally use non-standard HTML for email client compatibility
+# Prettier's strict HTML parser doesn't handle email-specific patterns well
+*.html
