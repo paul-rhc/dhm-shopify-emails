@@ -1,0 +1,257 @@
+<!-- BEGIN: CUSTOMER INFO PARTIAL -->
+<!-- Use with: {{> customer-info }} -->
+<!-- Two-column layout: Shipping Address (left) and Billing/Customer (right) -->
+<tr>
+  <th
+    class="section_border"
+    style="mso-line-height-rule: exactly; padding: 8px 30px"
+    bgcolor="#ffffff"
+  >
+    <table
+      border="0"
+      width="100%"
+      cellpadding="0"
+      cellspacing="0"
+      align="center"
+      style="min-width: 100%; direction: ltr"
+      role="presentation"
+    >
+      <tr>
+        <th
+          class="section_content"
+          style="mso-line-height-rule: exactly"
+          bgcolor="#ffffff"
+          valign="top"
+        >
+      <table
+        border="0"
+        width="100%"
+        cellpadding="0"
+        cellspacing="0"
+        align="center"
+        style="min-width: 100%; direction: ltr"
+        role="presentation"
+      >
+        <tr>
+          <!-- BEGIN : Column 1 of 2 : SHIPPING ADDRESS -->
+          <th
+            width="50%"
+            class="column_1_of_2 column_ship_to"
+            style="mso-line-height-rule: exactly"
+            align="left"
+            bgcolor="#ffffff"
+            valign="top"
+          >
+            <table
+              align="center"
+              border="0"
+              width="100%"
+              cellpadding="0"
+              cellspacing="0"
+              style="min-width: 100%; direction: ltr"
+              role="presentation"
+            >
+              {% if shipping_address != blank %}
+              <tr>
+                <th
+                  style="mso-line-height-rule: exactly; padding-right: 15px"
+                  align="left"
+                  bgcolor="#ffffff"
+                  valign="top"
+                >
+                  <h3
+                    style="
+                      font-family: Verdana, san-serif, 'Montserrat';
+                      color: #304535;
+                      font-size: 20px;
+                      line-height: 36px;
+                      font-weight: 500;
+                      text-transform: none;
+                      margin: 0;
+                    "
+                    align="left"
+                  >
+                    Shipping Address
+                  </h3>
+                </th>
+              </tr>
+              <tr>
+                <th
+                  class="shipping_address"
+                  style="mso-line-height-rule: exactly; padding-right: 15px"
+                  align="left"
+                  bgcolor="#ffffff"
+                  valign="top"
+                >
+                  <p
+                    style="
+                      mso-line-height-rule: exactly;
+                      direction: ltr;
+                      font-family: Verdana, san-serif, 'Montserrat';
+                      font-size: 16px;
+                      line-height: 30px;
+                      font-weight: 400;
+                      text-transform: none;
+                      color: #555555;
+                      margin: 0;
+                    "
+                    align="left"
+                  >
+                    {%- if shipping_address and shipping_address != blank -%}
+                    {{ shipping_address.name }}<br />
+                    {%- if shipping_address.company != blank -%}{{ shipping_address.company }}<br />{%- endif -%}
+                    {{ shipping_address.address1 }}<br />
+                    {%- if shipping_address.address2 != blank -%}{{ shipping_address.address2 }}<br />{%- endif -%}
+                    {{ shipping_address.city }}, {% if shipping_address.province_code != blank -%}{{ shipping_address.province_code }}{% else -%}{{ shipping_address.province }}{%- endif %} {{ shipping_address.zip | upcase }}
+                    {%- if shipping_address.country != shop.country -%}<br />{{ shipping_address.country }}{%- endif -%}
+                    {%- if shipping_address.phone != blank -%}<br />
+                    <span
+                      style="
+                        text-align: left;
+                        direction: ltr;
+                        font-family: Verdana, san-serif, 'Montserrat';
+                        font-size: 16px;
+                        line-height: 30px;
+                        font-weight: 400;
+                        text-transform: none;
+                        color: #555555;
+                      "
+                      >Tel.</span>
+                    <span
+                      style="
+                        color: inherit !important;
+                        text-decoration: none !important;
+                        text-align: left;
+                        direction: ltr;
+                        font-family: Verdana, san-serif, 'Montserrat';
+                        font-size: 16px;
+                        line-height: 30px;
+                        font-weight: 400;
+                        text-transform: none;
+                      "
+                      >{{ shipping_address.phone }}</span>{%- endif -%}
+                    {%- endif -%}
+                  </p>
+                </th>
+              </tr>
+              {% endif %}
+            </table>
+          </th>
+          <!-- END : Column 1 of 2 : SHIPPING ADDRESS -->
+
+          <!-- BEGIN : Column 2 of 2 : BILLING/CUSTOMER -->
+          <th
+            width="50%"
+            class="column_2_of_2 column_bill_to"
+            style="mso-line-height-rule: exactly"
+            align="left"
+            bgcolor="#ffffff"
+            valign="top"
+          >
+            <table
+              align="center"
+              border="0"
+              width="100%"
+              cellpadding="0"
+              cellspacing="0"
+              style="min-width: 100%; direction: ltr"
+              role="presentation"
+            >
+              {% if billing_address != blank or customer.default_address != blank or customer.name != blank %}
+              <tr>
+                <th
+                  style="mso-line-height-rule: exactly; padding-left: 15px"
+                  align="left"
+                  bgcolor="#ffffff"
+                  valign="top"
+                >
+                  <h3
+                    style="
+                      font-family: Verdana, san-serif, 'Montserrat';
+                      color: #304535;
+                      font-size: 20px;
+                      line-height: 36px;
+                      font-weight: 500;
+                      text-transform: none;
+                      margin: 0;
+                    "
+                    align="left"
+                  >
+                    Billing Address
+                  </h3>
+                </th>
+              </tr>
+              {% endif %}
+              <tr>
+                <th
+                  class="billing_address"
+                  style="mso-line-height-rule: exactly; padding-left: 15px"
+                  align="left"
+                  bgcolor="#ffffff"
+                  valign="top"
+                >
+                  {%- assign billing_address = billing_address | default: customer.default_address -%}
+                  <p
+                    style="
+                      mso-line-height-rule: exactly;
+                      direction: ltr;
+                      font-family: Verdana, san-serif, 'Montserrat';
+                      font-size: 16px;
+                      line-height: 30px;
+                      font-weight: 400;
+                      text-transform: none;
+                      color: #555555;
+                      margin: 0;
+                    "
+                    align="left"
+                  >
+                    {%- if billing_address and billing_address != blank -%}
+                    {{ billing_address.name }}<br />
+                    {%- if billing_address.company != blank -%}{{ billing_address.company }}<br />{%- endif -%}
+                    {{ billing_address.address1 }}<br />
+                    {%- if billing_address.address2 != blank -%}{{ billing_address.address2 }}<br />{%- endif -%}
+                    {{ billing_address.city }}, {% if billing_address.province_code != blank -%}{{ billing_address.province_code }}{% else -%}{{ billing_address.province }}{%- endif %} {{ billing_address.zip | upcase }}
+                    {%- if billing_address.country != shop.country -%}<br />{{ billing_address.country }}{%- endif -%}
+                    {%- if billing_address.phone != blank -%}<br />
+                    <span
+                      style="
+                        text-align: left;
+                        direction: ltr;
+                        font-family: Verdana, san-serif, 'Montserrat';
+                        font-size: 16px;
+                        line-height: 30px;
+                        font-weight: 400;
+                        text-transform: none;
+                        color: #555555;
+                      "
+                      >Tel.</span>
+                    <span
+                      style="
+                        color: inherit !important;
+                        text-decoration: none !important;
+                        text-align: left;
+                        direction: ltr;
+                        font-family: Verdana, san-serif, 'Montserrat';
+                        font-size: 16px;
+                        line-height: 30px;
+                        font-weight: 400;
+                        text-transform: none;
+                      "
+                      >{{ billing_address.phone }}</span>{%- endif -%}
+                    {%- elsif customer != blank -%}
+                    {% if customer.name != blank %}{{ customer.name }}{%- endif -%}
+                    {%- endif -%}
+                  </p>
+                </th>
+              </tr>
+            </table>
+          </th>
+          <!-- END : Column 2 of 2 : BILLING/CUSTOMER -->
+        </tr>
+      </table>
+        </th>
+      </tr>
+    </table>
+  </th>
+</tr>
+<!-- END: CUSTOMER INFO PARTIAL -->

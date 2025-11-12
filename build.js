@@ -64,14 +64,19 @@ function processTemplate(content) {
 
 /**
  * Build a single template file
- * @param {string} templateFile - Name of the template file
+ * @param {string} templateFile - Relative path to template file from TEMPLATES_DIR
  */
 function buildTemplate(templateFile) {
   const templatePath = path.join(TEMPLATES_DIR, templateFile);
-  const outputFileName = templateFile.replace(/\.html$/, '.html');
-  const outputPath = path.join(DIST_DIR, outputFileName);
+  const outputPath = path.join(DIST_DIR, templateFile);
 
   console.log(`📄 Building: ${templateFile}`);
+
+  // Ensure output directory exists
+  const outputDir = path.dirname(outputPath);
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true });
+  }
 
   // Read template
   const templateContent = fs.readFileSync(templatePath, 'utf8');
@@ -82,7 +87,35 @@ function buildTemplate(templateFile) {
   // Write output
   fs.writeFileSync(outputPath, processed, 'utf8');
 
-  console.log(`✅ Built: dist/${outputFileName}`);
+  console.log(`✅ Built: dist/${templateFile}`);
+}
+
+/**
+ * Recursively find all HTML templates
+ * @param {string} dir - Directory to search
+ * @param {string} baseDir - Base directory for relative paths
+ * @returns {Array<string>} Array of relative template paths
+ */
+function findTemplates(dir, baseDir = dir) {
+  let templates = [];
+
+  const items = fs.readdirSync(dir);
+
+  items.forEach(item => {
+    const fullPath = path.join(dir, item);
+    const stat = fs.statSync(fullPath);
+
+    if (stat.isDirectory()) {
+      // Recursively search subdirectories
+      templates = templates.concat(findTemplates(fullPath, baseDir));
+    } else if (item.endsWith('.html')) {
+      // Add relative path from base directory
+      const relativePath = path.relative(baseDir, fullPath);
+      templates.push(relativePath);
+    }
+  });
+
+  return templates;
 }
 
 /**
@@ -96,8 +129,7 @@ function buildAll() {
     process.exit(1);
   }
 
-  const templateFiles = fs.readdirSync(TEMPLATES_DIR)
-    .filter(file => file.endsWith('.html'));
+  const templateFiles = findTemplates(TEMPLATES_DIR);
 
   if (templateFiles.length === 0) {
     console.log('⚠️  No template files found in src/templates/');

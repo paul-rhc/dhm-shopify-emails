@@ -392,6 +392,142 @@
     <style type="text/css">
       /* Custom Media Queries */
       @media only screen and (max-width: 480px) {
+        /* Prevent horizontal scrolling */
+        body,
+        table,
+        th,
+        td {
+          max-width: 100% !important;
+        }
+
+        /* Force email container to fit within viewport */
+        .email-container {
+          width: 100% !important;
+          min-width: 100% !important;
+          max-width: 100% !important;
+        }
+
+        /* Header logo section - match product table padding */
+        .header .section_border {
+          padding-right: 10px !important;
+          padding-left: 10px !important;
+        }
+
+        .column_logo {
+          padding-right: 10px !important;
+          padding-left: 10px !important;
+        }
+
+        /* Heading/intro section - match product table padding */
+        .heading .section_border {
+          padding-right: 10px !important;
+          padding-left: 10px !important;
+        }
+
+        .heading .section_content {
+          padding-right: 10px !important;
+          padding-left: 10px !important;
+        }
+
+        /* Introduction text section - match product table padding */
+        .introduction .section_border {
+          padding-right: 10px !important;
+          padding-left: 10px !important;
+        }
+
+        .introduction .section_content {
+          padding-right: 10px !important;
+          padding-left: 10px !important;
+        }
+
+        /* Order number section mobile padding - remove nested padding */
+        .order_number_and_date .section_border {
+          padding-right: 10px !important;
+          padding-left: 10px !important;
+        }
+
+        .order_number_and_date .section_content {
+          padding-right: 0 !important;
+          padding-left: 0 !important;
+        }
+
+        /* Product table mobile adjustments */
+        .product_table {
+          padding-right: 0 !important;
+          padding-left: 0 !important;
+        }
+
+        /* Line item cells - reduce padding further on mobile */
+        th.line-item-image {
+          width: 80px !important;
+          padding-left: 10px !important;
+          padding-right: 5px !important;
+        }
+
+        th.line-item-description {
+          padding-left: 5px !important;
+          padding-right: 10px !important;
+        }
+
+        th.line-item-quantity,
+        th.line-item-price {
+          padding-left: 5px !important;
+          padding-right: 10px !important;
+        }
+
+        /* Product images - ensure they don't overflow */
+        th.line-item-image img {
+          max-width: 60px !important;
+          width: 60px !important;
+          height: auto !important;
+        }
+
+        /* Customer info section - match product table padding */
+        tr.section .section_border {
+          padding-right: 10px !important;
+          padding-left: 10px !important;
+        }
+
+        tr.section .section_content {
+          padding-right: 0 !important;
+          padding-left: 0 !important;
+        }
+
+        /* Shipping/Billing columns spacing on mobile when stacked */
+        .column_ship_to,
+        .column_bill_to {
+          padding-bottom: 15px !important;
+        }
+
+        .column_ship_to th {
+          padding-right: 0 !important;
+        }
+
+        .column_bill_to th {
+          padding-left: 0 !important;
+        }
+
+        /* Reduce font sizes slightly on very small screens */
+        h1 {
+          font-size: 28px !important;
+        }
+
+        h3 {
+          font-size: 18px !important;
+        }
+
+        /* Ensure text wraps properly without breaking words mid-character */
+        p,
+        span,
+        a {
+          overflow-wrap: break-word !important;
+          word-wrap: break-word !important;
+        }
+
+        /* Only break long URLs/strings that don't have natural break points */
+        a[href] {
+          word-break: break-all !important;
+        }
       }
     </style>
   </head>
@@ -462,11 +598,11 @@
             <center style="width: 100%">
               <table
                 border="0"
-                width="600"
+                width="640"
                 cellpadding="0"
                 cellspacing="0"
                 align="center"
-                style="width: 600px; min-width: 600px; max-width: 600px; direction: ltr; margin: auto"
+                style="width: 640px; min-width: 640px; max-width: 640px; direction: ltr; margin: auto"
                 class="email-container"
                 role="presentation"
               >

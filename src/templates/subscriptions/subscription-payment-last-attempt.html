@@ -1,0 +1,81 @@
+{{> head }}
+                      {{> header }}
+                      {{> container-open }}
+
+                      <!-- BEGIN: MAIN CONTENT -->
+                      <table
+                        class="sections_container"
+                        border="0"
+                        width="100%"
+                        cellpadding="0"
+                        cellspacing="0"
+                        align="center"
+                        style="min-width: 100%; direction: ltr"
+                        role="presentation"
+                      >
+                        <tr>
+                          <th
+                            class="section_border"
+                            style="mso-line-height-rule: exactly; padding: 45px 30px"
+                            bgcolor="#ffffff"
+                          >
+                            <table
+                              border="0"
+                              width="100%"
+                              cellpadding="0"
+                              cellspacing="0"
+                              align="center"
+                              style="min-width: 100%; direction: ltr"
+                              role="presentation"
+                            >
+                              <tr>
+                                <th
+                                  class="section_content"
+                                  style="
+                                    mso-line-height-rule: exactly;
+                                    direction: ltr;
+                                    font-family: Verdana, sans-serif, 'Montserrat';
+                                    font-size: 18px;
+                                    line-height: 28px;
+                                    font-weight: 400;
+                                    color: #333333;
+                                    padding: 8px 30px;
+                                  "
+                                  align="left"
+                                >
+<h2>Your payment is {{ subscription_contract_billing_cycle.days_overdue }} overdue</h2>
+          <p>
+            {% case status_after_dunning %}
+              {% when "paused" %}
+                Update your payment method by {{ final_charge_date }} to avoid a delay in your subscription order. If you fail to update your payment method, your subscription will be paused.
+              {% when "canceled" %}
+                Update your payment method by {{ final_charge_date }} to avoid a delay in your subscription order. If you fail to update your payment method, your subscription will be canceled.
+              {% when "skipped" %}
+                Update your payment method by {{ final_charge_date }} to avoid a delay in your subscription order. If you fail to update your payment method, your subscription will be skipped.
+            {% endcase %}
+          </p>
+          {% if shop.url %}
+    <table class="row actions">
+      <tr>
+        <td class="empty-line">&nbsp;
+                                </th>
+                              </tr>
+                            </table>
+                          </th>
+                        </tr>
+                      </table>
+                      <!-- END: MAIN CONTENT -->
+
+                      {{> container-close }}
+                      {{> footer-short }}
+                    </th>
+                  </tr>
+                </tbody>
+              </table>
+            </center>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+    <!-- END: CONTAINER -->
+{{> body-close }}

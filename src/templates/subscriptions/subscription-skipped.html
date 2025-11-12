@@ -1,0 +1,75 @@
+{{> head }}
+                      {{> header }}
+                      {{> container-open }}
+
+                      <!-- BEGIN: MAIN CONTENT -->
+                      <table
+                        class="sections_container"
+                        border="0"
+                        width="100%"
+                        cellpadding="0"
+                        cellspacing="0"
+                        align="center"
+                        style="min-width: 100%; direction: ltr"
+                        role="presentation"
+                      >
+                        <tr>
+                          <th
+                            class="section_border"
+                            style="mso-line-height-rule: exactly; padding: 45px 30px"
+                            bgcolor="#ffffff"
+                          >
+                            <table
+                              border="0"
+                              width="100%"
+                              cellpadding="0"
+                              cellspacing="0"
+                              align="center"
+                              style="min-width: 100%; direction: ltr"
+                              role="presentation"
+                            >
+                              <tr>
+                                <th
+                                  class="section_content"
+                                  style="
+                                    mso-line-height-rule: exactly;
+                                    direction: ltr;
+                                    font-family: Verdana, sans-serif, 'Montserrat';
+                                    font-size: 18px;
+                                    line-height: 28px;
+                                    font-weight: 400;
+                                    color: #333333;
+                                    padding: 8px 30px;
+                                  "
+                                  align="left"
+                                >
+<h2>Your upcoming subscription order was skipped</h2>
+          <p>Your upcoming order for {{ subscription_contract_billing_cycle.billing_attempt_expected_date }} was skipped. You will not be charged. Your next subscription charge date is {{ subscription_contract_billing_cycle.next_billing_date }}. Manage your subscription to make changes to future orders.</p>
+          {% if shop.url %}
+    <table class="row actions">
+      <tr>
+        <td class="actions__cell">
+          <table class="button main-action-cell">
+            <tr>
+              <td class="button__cell"><a href="{{ subscription_contract_billing_cycle.customer_self_serve_url }}" class="button__text">Manage your subscription</a>
+                                </th>
+                              </tr>
+                            </table>
+                          </th>
+                        </tr>
+                      </table>
+                      <!-- END: MAIN CONTENT -->
+
+                      {{> container-close }}
+                      {{> footer-short }}
+                    </th>
+                  </tr>
+                </tbody>
+              </table>
+            </center>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+    <!-- END: CONTAINER -->
+{{> body-close }}

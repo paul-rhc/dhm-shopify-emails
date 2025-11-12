@@ -1,0 +1,518 @@
+<!-- BEGIN: ORDER ITEMS PARTIAL -->
+<!-- Use with: {{> order-items }} -->
+<!-- Variables: line_items (can be order.line_items or subscription line items) -->
+<tr>
+  <th
+    class="section_border"
+    style="mso-line-height-rule: exactly; padding: 8px 30px"
+    bgcolor="#ffffff"
+  >
+    <table
+      border="0"
+      width="100%"
+      cellpadding="0"
+      cellspacing="0"
+      align="center"
+      style="min-width: 100%; direction: ltr"
+      role="presentation"
+    >
+      <tr>
+        <th
+          class="product_table table_content"
+          style="
+            mso-line-height-rule: exactly;
+            padding-top: 8px;
+            padding-bottom: 8px;
+          "
+          bgcolor="#ffffff"
+          valign="top"
+        >
+      <table
+        cellspacing="0"
+        cellpadding="0"
+        border="0"
+        width="100%"
+        style="min-width: 100%; direction: ltr"
+        role="presentation"
+      >
+        <tr>
+          <th
+            colspan="2"
+            class="table_main_title"
+            style="mso-line-height-rule: exactly"
+            bgcolor="#ffffff"
+            valign="top"
+          >
+            <h3
+              data-key="33272943_item"
+              class="items-ordered-title"
+              style="
+                font-family: Verdana, san-serif, 'Montserrat';
+                color: #4a693d;
+                font-size: 16px;
+                line-height: 36px;
+                font-weight: 500;
+                text-transform: uppercase;
+                border-bottom-width: 1px;
+                border-bottom-color: #ececec;
+                border-bottom-style: solid;
+                margin: 0;
+              "
+              align="left"
+            >
+              Items ordered
+            </h3>
+          </th>
+        </tr>
+        {% if line_items != blank %}
+
+        {% assign hidden_variant_ids = "" %}
+        {% for line_item in line_items %}
+        {% if line_item.quantity != 0 %}
+        {%- assign original_item = line_item -%}
+        {%- assign current_item = line_item -%}
+        {%- if original_item.quantity == 0 -%}
+          {%- assign original_quantity = current_item.quantity -%}
+        {%- else -%}
+          {%- assign original_quantity = original_item.quantity -%}
+        {%- endif -%}
+        <!-- Bold 2 -->
+        {% capture line_variant_id1 %}{{ original_item.variant_id }}{% endcapture %}
+        {% assign adjusted_item_price = original_item.price | default: 0 %}
+        {% assign adjusted_line_price = original_item.final_line_price | default: 0 %}
+        {% assign adjusted_line_option_price = 0 %}
+        {% unless line_variant_id1 == blank %}
+          {% if hidden_variant_ids contains line_variant_id1 %}{% continue %}{% endif %}
+          {% for line_item2 in line_items %}
+            {% assign original_item2 = line_item2 %}
+            {% capture line_variant_id2 %}{{ original_item2.variant_id }}{% endcapture %}
+            {% if original_item2.properties._boldVariantIds contains line_variant_id2 and original_item.properties._boldBuilderId == original_item2.properties._boldBuilderId %}
+              {% assign adjusted_item_price = adjusted_item_price | plus: original_item2.price %}
+              {% assign adjusted_line_option_price = original_item2.final_line_price %}
+              {% assign adjusted_line_price = adjusted_line_price | plus: adjusted_line_option_price %}
+            {% endif %}
+          {% endfor %}
+        {% endunless %}
+        <!-- end Bold 2 -->
+        <tr class="row-border-bottom">
+          <th
+            class="table-stack product-image-wrapper stack-column-center"
+            width="1"
+            style="
+              mso-line-height-rule: exactly;
+              border-bottom-width: 1px;
+              border-bottom-color: #ececec;
+              border-bottom-style: solid;
+              padding-top: 15px;
+              padding-bottom: 15px;
+              padding-right: 15px;
+            "
+            bgcolor="#ffffff"
+            valign="top"
+          >
+            {% if original_item.image != blank %}
+            <a
+              href="{% capture link %}https://{{shop.domain}}{{original_item.product.url}}{% endcapture %}{% if link contains shop.domain %}{% assign split_link = link | split: question_mark %}{{split_link[0]}}?{{default_utms}}&amp;utm_content=product{% if split_link[1] != blank %}&{{split_link[1]}}{% endif %}{% else %}{{link}}{% endif %}"
+              class="product_link"
+              target="_blank"
+              style="
+                color: #000000;
+                text-decoration: none !important;
+                text-underline: none;
+                word-wrap: break-word;
+              "
+            >
+              <img
+                width="120"
+                class="product-image"
+                src="{{ original_item.image | image_url: width: 240, height: 240, crop: 'center' }}"
+                alt="{{ original_item.title }}"
+                style="
+                  vertical-align: middle;
+                  text-align: center;
+                  width: 120px;
+                  max-width: 120px;
+                  height: auto !important;
+                  border-radius: 10px;
+                  padding: 0px;
+                  border: 1px solid #f5f5f5;
+                "
+              />
+            </a>
+            {% endif %}
+          </th>
+          <th
+            class="product-details-wrapper table-stack stack-column"
+            style="
+              mso-line-height-rule: exactly;
+              border-bottom-width: 1px;
+              border-bottom-color: #ececec;
+              border-bottom-style: solid;
+              padding-top: 15px;
+              padding-bottom: 15px;
+            "
+            bgcolor="#ffffff"
+            valign="middle"
+          >
+            <table
+              cellspacing="0"
+              cellpadding="0"
+              border="0"
+              width="100%"
+              style="min-width: 100%; direction: ltr"
+              role="presentation"
+            >
+              <tr>
+                <th
+                  class="line-item-description"
+                  style="
+                    mso-line-height-rule: exactly;
+                    direction: ltr;
+                    font-family: Verdana, san-serif, 'Montserrat';
+                    font-size: 16px;
+                    line-height: 30px;
+                    font-weight: 400;
+                    text-transform: none;
+                    color: #555555;
+                    padding: 15px 8px 15px 0;
+                  "
+                  align="left"
+                  bgcolor="#ffffff"
+                  valign="top"
+                >
+                  <p
+                    style="
+                      mso-line-height-rule: exactly;
+                      direction: ltr;
+                      font-family: Verdana, san-serif, 'Montserrat';
+                      font-size: 16px;
+                      line-height: 30px;
+                      font-weight: 400;
+                      text-transform: none;
+                      color: #555555;
+                      margin: 0;
+                    "
+                    align="left"
+                  >
+                    {% capture line_title %}{{ original_item.product.title | default: original_item.title }}{% endcapture %}
+                    <a
+                      href="{% capture link %}https://{{shop.domain}}{{line_item.product.url}}{% endcapture %}{% if link contains shop.domain %}{% assign split_link = link | split: question_mark %}{{split_link[0]}}?{{default_utms}}&amp;utm_content=product{% if split_link[1] != blank %}&{{split_link[1]}}{% endif %}{% else %}{{link}}{% endif %}"
+                      class="product_link product-title-link"
+                      target="_blank"
+                      style="
+                        color: #4a693d;
+                        text-decoration: none !important;
+                        text-underline: none;
+                        word-wrap: break-word;
+                        text-align: left !important;
+                        font-weight: 400;
+                      "
+                    >
+                      {{ line_title }}
+                    </a>
+                    {% if original_item.variant.title != blank and original_item.variant.title != "Default Title" and original_item.variant.title != "Default" %}<br />
+                    <span
+                      class="muted"
+                      style="
+                        text-align: left;
+                        direction: ltr;
+                        font-family: Verdana, san-serif, 'Montserrat';
+                        font-size: 14px;
+                        line-height: 30px;
+                        font-weight: normal;
+                        text-transform: none;
+                        color: #666666;
+                      "
+                      >{{ original_item.variant.title }}</span>{% endif %}
+                    {% if original_item.product.metafields.custom.dhm_general_rx_required %}<br />
+                    <span
+                      class="muted"
+                      style="
+                        text-align: left;
+                        direction: ltr;
+                        font-family: Verdana, san-serif, 'Montserrat';
+                        font-size: 14px;
+                        line-height: 30px;
+                        font-weight: normal;
+                        text-transform: none;
+                        color: #666666;
+                      "
+                      >Prescription Required for Shipment</span>{% endif %}
+                    {% if original_item.product.metafields.custom.dhm_promos_risk_free_trial %}<br />
+                    <span
+                      class="muted"
+                      style="
+                        text-align: left;
+                        direction: ltr;
+                        font-family: Verdana, san-serif, 'Montserrat';
+                        font-size: 14px;
+                        line-height: 30px;
+                        font-weight: normal;
+                        text-transform: none;
+                        color: #666666;
+                      "
+                      >{{ original_item.product.metafields.custom.dhm_promos_risk_free_trial | metafield_text }}</span>{% endif %}
+                    {% if original_item.product.metafields.custom.dhm_promos_warranty %}<br />
+                    <span
+                      class="muted"
+                      style="
+                        text-align: left;
+                        direction: ltr;
+                        font-family: Verdana, san-serif, 'Montserrat';
+                        font-size: 14px;
+                        line-height: 30px;
+                        font-weight: normal;
+                        text-transform: none;
+                        color: #666666;
+                      "
+                      >{{ original_item.product.metafields.custom.dhm_promos_warranty | metafield_text }}</span>{% endif %}
+                    {% if custom.dhm_general_hcpcs_code != blank %}<br />
+                    <span
+                      class="muted"
+                      style="
+                        text-align: left;
+                        direction: ltr;
+                        font-family: Verdana, san-serif, 'Montserrat';
+                        font-size: 14px;
+                        line-height: 30px;
+                        font-weight: normal;
+                        text-transform: none;
+                        color: #666666;
+                      "
+                      >HCPCS Code: {{ original_item.product.metafields.custom..dhm_general_hcpcs_code }}</span>{% endif %}
+                    {% if original_item.selling_plan_allocation != blank %}<br />
+                    <span
+                      class="muted"
+                      style="
+                        text-align: left;
+                        direction: ltr;
+                        font-family: Verdana, san-serif, 'Montserrat';
+                        font-size: 14px;
+                        line-height: 30px;
+                        font-weight: normal;
+                        text-transform: none;
+                        color: #666666;
+                      "
+                      >{{ original_item.selling_plan_allocation.selling_plan.name }}</span>{% endif %}
+                    {% if original_item.refunded_quantity != 0 and original_item.refunded_quantity != blank %}<br />
+                    <span
+                      class="line-item-refunded-tag"
+                      style="
+                        text-align: left;
+                        direction: ltr;
+                        font-family: Verdana, san-serif, 'Montserrat';
+                        font-size: 14px;
+                        line-height: 30px;
+                        font-weight: normal;
+                        text-transform: none;
+                        color: #ffffff;
+                        background-color: #4a693d;
+                        border-radius: 8px;
+                        padding: 2px 6px;
+                      "
+                      >{{ original_item.refunded_quantity }}x&nbsp;Refunded</span>{% endif %}
+                    {% assign sku = original_item.sku | default: line_item.variant.sku %}
+                    {% if line_item.variant.unit_price_measurement != blank %}<br />
+                    <span
+                      class="muted"
+                      style="
+                        text-align: left;
+                        direction: ltr;
+                        font-family: Verdana, san-serif, 'Montserrat';
+                        font-size: 14px;
+                        line-height: 30px;
+                        font-weight: normal;
+                        text-transform: none;
+                        color: #666666;
+                      "
+                      >({{ line_item.variant.unit_price | money }}{% if line_item.variant.unit_price_measurement.reference_value != 1 %} {{ line_item.variant.unit_price_measurement.reference_value }}{% endif %}/{{ line_item.variant.unit_price_measurement.reference_unit | capitalize }})</span>{% endif %}
+                    {% for p in original_item.properties %}
+                    {% assign p_internal = p.first | slice: 0 %}
+                    {% unless p.first contains "builder_id" or p.first contains "builder_info" or p.first contains "master_builder" or p.last == "" or p.last == blank %}
+                      {% if p.first contains "preview" or p.last contains "/uploads/" or p.last contains "//uploadery.s3" %}
+                      <br />
+                      <span
+                        class="muted"
+                        style="
+                          text-align: left;
+                          direction: ltr;
+                          font-family: Verdana, san-serif, 'Montserrat';
+                          font-size: 14px;
+                          line-height: 30px;
+                          font-weight: normal;
+                          text-transform: none;
+                          color: #666666;
+                        "
+                        >{{ p.first }}:<br />
+                      </span>
+                      <a
+                        href="{{ p.last }}"
+                        target="_blank"
+                        style="
+                          color: #555555;
+                          text-decoration: none !important;
+                          text-underline: none;
+                          word-wrap: break-word;
+                          text-align: left !important;
+                          font-weight: 400;
+                        "
+                        ><img
+                          src="{{ p.last }}"
+                          alt="{{ p.first }}"
+                          width="60"
+                          border="0"
+                          style="width: 60px; height: auto !important"
+                      /></a>
+                      {% elsif p_internal != "_" %}
+                      <br />
+                      <span
+                        class="muted"
+                        style="
+                          text-align: left;
+                          direction: ltr;
+                          font-family: Verdana, san-serif, 'Montserrat';
+                          font-size: 14px;
+                          line-height: 30px;
+                          font-weight: normal;
+                          text-transform: none;
+                          color: #666666;
+                        "
+                        >{{ p.first }}: {{ p.last }}</span
+                      >
+                      {% endif %}
+                    {% endunless %}
+                    {% endfor %}
+                    {% for discount_allocation in original_item.discount_allocations %}
+                      {% if discount_allocation.discount_application.target_selection != "all" and discount_allocation.discount_application.target_type == "line_item" %}
+                      <br />
+                      <img
+                        alt="Discount"
+                        width="18"
+                        height="18"
+                        style="vertical-align: middle; margin-right: 2px"
+                        src="https://www.orderlyemails.com/icons/discount/regular-3.png"
+                      />
+                      <span
+                        class="muted"
+                        style="
+                          text-align: left;
+                          direction: ltr;
+                          font-family: Verdana, san-serif, 'Montserrat';
+                          font-size: 14px;
+                          line-height: 30px;
+                          font-weight: normal;
+                          text-transform: none;
+                          color: #666666;
+                        "
+                        >{{ discount_allocation.discount_application.title | default: "Discount" | upcase }} (-{{ discount_allocation.amount | divided_by: original_quantity | times: current_item.quantity | money }})</span
+                      >
+                      {% endif %}
+                    {% endfor %}
+                  </p>
+                </th>
+                <th
+                  class="right line-item-qty"
+                  width="1"
+                  style="
+                    mso-line-height-rule: exactly;
+                    white-space: nowrap;
+                    padding: 15px 8px 15px 30px;
+                  "
+                  align="right"
+                  bgcolor="#ffffff"
+                  valign="top"
+                >
+                  <p
+                    style="
+                      mso-line-height-rule: exactly;
+                      direction: ltr;
+                      font-family: Verdana, san-serif, 'Montserrat';
+                      font-size: 16px;
+                      line-height: 30px;
+                      font-weight: 400;
+                      text-transform: none;
+                      color: #555555;
+                      margin: 0;
+                    "
+                    align="right"
+                  >
+                    x&nbsp;{{ line_item.quantity }}
+                  </p>
+                </th>
+                <th
+                  class="right line-item-line-price"
+                  width="1"
+                  style="
+                    mso-line-height-rule: exactly;
+                    white-space: nowrap;
+                    padding: 15px 0 15px 30px;
+                  "
+                  align="right"
+                  bgcolor="#ffffff"
+                  valign="top"
+                >
+                  <p
+                    style="
+                      mso-line-height-rule: exactly;
+                      direction: ltr;
+                      font-family: Verdana, san-serif, 'Montserrat';
+                      font-size: 16px;
+                      line-height: 30px;
+                      font-weight: 400;
+                      text-transform: none;
+                      color: #555555;
+                      margin: 0;
+                    "
+                    align="right"
+                  >
+                    {%- if original_item.original_line_price != original_item.final_line_price -%}
+                    <span
+                      class="muted line-item-sale-price"
+                      style="
+                        text-align: left;
+                        direction: ltr;
+                        font-family: Verdana, san-serif, 'Montserrat';
+                        font-size: 14px;
+                        line-height: 20px;
+                        font-weight: normal;
+                        text-transform: none;
+                        color: #666666;
+                      "
+                      ><del>{{ original_item.original_line_price | divided_by: original_quantity | times: current_item.quantity | money }}</del></span
+                    ><br />
+                    {{ original_item.final_line_price | divided_by: original_quantity | times: current_item.quantity | money }}
+                    {%- elsif original_item.variant.compare_at_price != blank and original_item.variant.compare_at_price != 0 -%}
+                    <span
+                      class="muted line-item-sale-price"
+                      style="
+                        text-align: left;
+                        direction: ltr;
+                        font-family: Verdana, san-serif, 'Montserrat';
+                        font-size: 14px;
+                        line-height: 20px;
+                        font-weight: normal;
+                        text-transform: none;
+                        color: #666666;
+                      "
+                      ><del>{{ original_item.variant.compare_at_price | times: current_item.quantity | money }}</del></span
+                    ><br />
+                    {{ adjusted_line_price | money }}
+                    {%- else -%}
+                    {{ adjusted_line_price | money }}
+                    {%- endif -%}
+                  </p>
+                </th>
+              </tr>
+            </table>
+          </th>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+      </table>
+        </th>
+      </tr>
+    </table>
+  </th>
+</tr>
+<!-- END: ORDER ITEMS PARTIAL -->

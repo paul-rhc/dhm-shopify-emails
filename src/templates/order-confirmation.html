@@ -1,0 +1,215 @@
+{{> head }}
+{{> header }}
+{{> container-open }}
+
+<!-- BEGIN: SECTIONS CONTAINER -->
+<table
+  class="sections_container"
+  border="0"
+  width="100%"
+  cellpadding="0"
+  cellspacing="0"
+  align="center"
+  style="min-width: 100%; direction: ltr"
+  role="presentation"
+>
+  <!-- HEADING SECTION -->
+  <tr id="section-33272938" class="section heading">
+    <th
+      class="section_border"
+      style="mso-line-height-rule: exactly; padding: 30px 30px 8px"
+      bgcolor="#ffffff"
+    >
+      <table
+        border="0"
+        width="100%"
+        cellpadding="0"
+        cellspacing="0"
+        align="center"
+        style="min-width: 100%; direction: ltr"
+        role="presentation"
+      >
+        <tr>
+          <th
+            class="section_content"
+            style="mso-line-height-rule: exactly"
+            bgcolor="#ffffff"
+            valign="top"
+          >
+            <table
+              cellspacing="0"
+              cellpadding="0"
+              border="0"
+              width="100%"
+              role="presentation"
+              style="direction: ltr"
+            >
+              <tr>
+                <th style="mso-line-height-rule: exactly" bgcolor="#ffffff" valign="top">
+                  <h1
+                    data-key="33272938_heading"
+                    style="
+                      font-family: Verdana, san-serif, 'Montserrat';
+                      font-size: 32px;
+                      line-height: 40px;
+                      padding-top: 10px;
+                      padding-bottom: 10px;
+                      font-weight: 500;
+                      color: #304535;
+                      text-transform: none;
+                      margin: 0;
+                    "
+                    align="left"
+                  >
+                    Order Confirmation
+                  </h1>
+                </th>
+              </tr>
+            </table>
+          </th>
+        </tr>
+      </table>
+    </th>
+  </tr>
+
+  <!-- INTRODUCTION SECTION -->
+  <tr id="section-33272939" class="section introduction">
+    <th
+      class="section_border"
+      style="mso-line-height-rule: exactly; padding: 8px 30px"
+      bgcolor="#ffffff"
+    >
+      <table
+        border="0"
+        width="100%"
+        cellpadding="0"
+        cellspacing="0"
+        align="center"
+        style="min-width: 100%; direction: ltr"
+        role="presentation"
+      >
+        <tr>
+          <th
+            class="section_content"
+            style="mso-line-height-rule: exactly"
+            bgcolor="#ffffff"
+            valign="top"
+          >
+            <p
+              style="
+                mso-line-height-rule: exactly;
+                direction: ltr;
+                font-family: Verdana, san-serif, 'Montserrat';
+                font-size: 16px;
+                line-height: 30px;
+                font-weight: 400;
+                text-transform: none;
+                color: #555555;
+                margin: 0;
+              "
+              align="left"
+            >
+              <span
+                data-key="33272939_greeting_text"
+                style="
+                  text-align: left;
+                  direction: ltr;
+                  font-family: Verdana, san-serif, 'Montserrat';
+                  font-size: 16px;
+                  line-height: 30px;
+                  font-weight: bold;
+                  text-transform: none;
+                  color: #555555;
+                "
+              >
+                Thanks For Your Order {% if customer.first_name != blank or billing_address.first_name != blank %}{{ customer.first_name | default: billing_address.first_name }}{% endif %}.
+              </span> We're glad you chose DirectHomeMedical. Our Care Team will review your order quickly and let you know as soon as it ships; but you can check the status at any time by clicking the button below:
+            </p>
+          </th>
+        </tr>
+      </table>
+    </th>
+  </tr>
+
+  <!-- ORDER STATUS BUTTON SECTION -->
+  <!-- TO DO: Add order status button section -->
+
+  <!-- ORDER NUMBER AND DATE SECTION -->
+  <tr id="section-order-number" class="section order_number_and_date">
+    <th
+      class="section_border"
+      style="mso-line-height-rule: exactly; padding: 8px 30px"
+      bgcolor="#ffffff"
+    >
+      <table
+        border="0"
+        width="100%"
+        cellpadding="0"
+        cellspacing="0"
+        align="center"
+        style="min-width: 100%; direction: ltr"
+        role="presentation"
+      >
+        <tr>
+          <th
+            class="section_content"
+            style="mso-line-height-rule: exactly"
+            bgcolor="#ffffff"
+            valign="top"
+          >
+            {% if name != blank %}
+            <h3
+              style="
+                font-family: Verdana, san-serif, 'Montserrat';
+                color: #304535;
+                font-size: 20px;
+                line-height: 36px;
+                font-weight: 500;
+                text-transform: none;
+                margin: 0;
+              "
+              align="left"
+            >
+              <span data-key="order_number">Order No.</span> {{ name }}
+            </h3>
+            <p
+              class="muted"
+              style="
+                mso-line-height-rule: exactly;
+                direction: ltr;
+                font-family: Verdana, san-serif, 'Montserrat';
+                font-size: 14px;
+                line-height: 30px;
+                font-weight: normal;
+                text-transform: none;
+                color: #666666;
+                margin: 0;
+              "
+              align="left"
+            >
+              {{ created_at | date: "%B %d, %Y" }}
+            </p>
+            {% endif %}
+          </th>
+        </tr>
+      </table>
+    </th>
+  </tr>
+
+  <!-- ORDER ITEMS SECTION -->
+  {{> order-items }}
+
+  <!-- PAYMENT INFO SECTION -->
+  <!-- TO DO: Extract payment info partial -->
+
+  <!-- CUSTOMER INFO SECTION -->
+  {{> customer-info }}
+
+  <!-- ORDER NOTES SECTION -->
+  <!-- TO DO: Add order notes section -->
+
+</table>
+<!-- END: SECTIONS CONTAINER -->
+
+{{> container-close }}
+{{> footer-long }}
