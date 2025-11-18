@@ -1,0 +1,50 @@
+<!-- BEGIN: VIEW ORDER BUTTON PARTIAL -->
+<!-- Use with: {{> view-order-button }} -->
+<!-- Button to view order status on Shopify -->
+<tr class="view_order_button">
+  <th
+    class="section_border"
+    style="mso-line-height-rule: exactly; padding: 8px 30px"
+    bgcolor="#ffffff"
+  >
+    <table
+      border="0"
+      width="100%"
+      cellpadding="0"
+      cellspacing="0"
+      align="center"
+      style="min-width: 100%; direction: ltr"
+      role="presentation"
+    >
+      <tr>
+        <th
+          class="section_content"
+          style="mso-line-height-rule: exactly"
+          bgcolor="#ffffff"
+          valign="top"
+        >
+          {% if order_status_url %}
+          <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box; min-width: 100% !important;" width="100%">
+            <tbody>
+              <tr>
+                <td align="center" style="font-family: Verdana, sans-serif, 'Montserrat'; font-size: 16px; vertical-align: top; padding-bottom: 16px; padding-top: 16px;" valign="top">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;">
+                    <tbody>
+                      <tr>
+                        <td style="font-family: Verdana, sans-serif, 'Montserrat'; font-size: 16px; vertical-align: top; background-color: #b2cc36; border-radius: 4px; text-align: center;" valign="top" bgcolor="#b2cc36" align="center">
+                          <a href="{{ order_status_url }}" target="_blank" style="display: inline-block; color: #294634; background-color: #b2cc36; border: solid 2px #b2cc36; border-radius: 4px; box-sizing: border-box; cursor: pointer; text-decoration: none; font-size: 16px; font-weight: bold; margin: 0; padding: 12px 24px; text-transform: capitalize; border-color: #b2cc36;">View Your Order</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          {% endif %}
+        </th>
+      </tr>
+    </table>
+  </th>
+</tr>
+<!-- END: VIEW ORDER BUTTON PARTIAL -->

@@ -390,6 +390,19 @@
       }
     </style>
     <style type="text/css">
+      /* Button Hover Styles */
+      @media all {
+        .btn-primary table td:hover {
+          background-color: #294634 !important;
+        }
+        .btn-primary a:hover {
+          background-color: #294634 !important;
+          border-color: #294634 !important;
+          color: #ffffff !important;
+        }
+      }
+    </style>
+    <style type="text/css">
       /* Custom Media Queries */
       @media only screen and (max-width: 480px) {
         /* Prevent horizontal scrolling */
@@ -501,6 +514,26 @@
 
         .column_ship_to th {
           padding-right: 0 !important;
+        }
+
+        /* Promo benefits section mobile padding */
+        .promo_benefits .section_border {
+          padding-top: 30px !important;
+          padding-bottom: 30px !important;
+          padding-right: 10px !important;
+          padding-left: 10px !important;
+        }
+
+        .promo_benefits .span-2 {
+          margin-bottom: 20px !important;
+        }
+
+        /* Promo benefits - prevent mid-word breaks */
+        .promo_benefits .article-title,
+        .promo_benefits .article-title a {
+          word-break: keep-all !important;
+          overflow-wrap: break-word !important;
+          hyphens: none !important;
         }
 
         .column_bill_to th {

@@ -132,7 +132,7 @@
   </tr>
 
   <!-- ORDER STATUS BUTTON SECTION -->
-  <!-- TO DO: Add order status button section -->
+  {{> view-order-button }}
 
   <!-- ORDER NUMBER AND DATE SECTION -->
   <tr id="section-order-number" class="section order_number_and_date">
@@ -200,13 +200,16 @@
   {{> order-items }}
 
   <!-- PAYMENT INFO SECTION -->
-  <!-- TO DO: Extract payment info partial -->
+  {{> payment-info }}
 
   <!-- CUSTOMER INFO SECTION -->
   {{> customer-info }}
 
   <!-- ORDER NOTES SECTION -->
-  <!-- TO DO: Add order notes section -->
+  {{> order-notes }}
+
+  <!-- PROMO BENEFITS SECTION -->
+  {{> promo-benefits }}
 
 </table>
 <!-- END: SECTIONS CONTAINER -->
