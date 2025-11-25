@@ -1,74 +1,82 @@
+{% if fulfillment.item_count == item_count %}
+  {% capture email_title %}Your order has been delivered{% endcapture %}
+  {% capture email_body %}Your order has been delivered. Track your shipment to see the delivery status.{% endcapture %}
+{% elsif fulfillment.item_count > 1 %}
+  {% if fulfillment_status == 'fulfilled' %}
+    {% capture email_title %}The last items in your order have been delivered{% endcapture %}
+    {% capture email_body %}The last items in your order have been delivered. Track your shipment to see the delivery status.{% endcapture %}
+  {% else %}
+    {% capture email_title %}Some items in your order have been delivered{% endcapture %}
+    {% capture email_body %}Some items in your order have been delivered. Track your shipment to see the delivery status.{% endcapture %}
+  {% endif %}
+{% else %}
+  {% if fulfillment_status == 'fulfilled' %}
+    {% capture email_title %}The last item in your order has been delivered{% endcapture %}
+    {% capture email_body %}The last item in your order has been delivered. Track your shipment to see the delivery status.{% endcapture %}
+  {% else %}
+    {% capture email_title %}One item in your order has been delivered{% endcapture %}
+    {% capture email_body %}One item in your order has been delivered. Track your shipment to see the delivery status.{% endcapture %}
+  {% endif %}
+{% endif %}
+
 {{> head }}
-                      {{> header }}
-                      {{> container-open }}
+{{> header }}
+{{> container-open }}
 
-                      <!-- BEGIN: MAIN CONTENT -->
-                      <table
-                        class="sections_container"
-                        border="0"
-                        width="100%"
-                        cellpadding="0"
-                        cellspacing="0"
-                        align="center"
-                        style="min-width: 100%; direction: ltr"
-                        role="presentation"
-                      >
-                        <tr>
-                          <th
-                            class="section_border"
-                            style="mso-line-height-rule: exactly; padding: 45px 30px"
-                            bgcolor="#ffffff"
-                          >
-                            <table
-                              border="0"
-                              width="100%"
-                              cellpadding="0"
-                              cellspacing="0"
-                              align="center"
-                              style="min-width: 100%; direction: ltr"
-                              role="presentation"
-                            >
-                              <tr>
-                                <th
-                                  class="section_content"
-                                  style="
-                                    mso-line-height-rule: exactly;
-                                    direction: ltr;
-                                    font-family: Verdana, sans-serif, 'Montserrat';
-                                    font-size: 18px;
-                                    line-height: 28px;
-                                    font-weight: 400;
-                                    color: #333333;
-                                    padding: 8px 30px;
-                                  "
-                                  align="left"
-                                >
-<h2>{{ email_title }}</h2>
-            <table class="text-icon-container">
-              <tr class="text-icon-row">
-                <td class="text-icon"><img src="{{ 'notifications/question.png' | shopify_asset_url }}" class="text-icon__image">
-                                </th>
-                              </tr>
-                            </table>
-                          </th>
-                        </tr>
-                      </table>
-                      <!-- END: MAIN CONTENT -->
-
-                      <!-- PROMO BENEFITS SECTION -->
-                      {{> promo-benefits }}
-
-                      {{> container-close }}
-
-                      {{> footer-short }}
-                    </th>
-                  </tr>
-                </tbody>
-              </table>
-            </center>
+<!-- BEGIN: MAIN CONTENT -->
+<table
+  class="sections_container"
+  border="0"
+  width="100%"
+  cellpadding="0"
+  cellspacing="0"
+  align="center"
+  style="min-width: 100%; direction: ltr"
+  role="presentation"
+>
+  <tr>
+    <th
+      class="section_border"
+      style="mso-line-height-rule: exactly; padding: 45px 30px"
+      bgcolor="#ffffff"
+    >
+      <table
+        border="0"
+        width="100%"
+        cellpadding="0"
+        cellspacing="0"
+        align="center"
+        style="min-width: 100%; direction: ltr"
+        role="presentation"
+      >
+        <tr>
+          <th
+            class="section_content"
+            style="
+              mso-line-height-rule: exactly;
+              direction: ltr;
+              font-family: Verdana, sans-serif, 'Montserrat';
+              font-size: 18px;
+              line-height: 28px;
+              font-weight: 400;
+              color: #333333;
+            "
+            align="left"
+          >
+            <h2>{{ email_title }}</h2>
+            <p>{{ email_body }}</p>
           </th>
         </tr>
-      </tbody>
-    </table>
-    <!-- END: CONTAINER -->
+      </table>
+    </th>
+  </tr>
+</table>
+<!-- END: MAIN CONTENT -->
+
+{{> container-close }}
+
+<!-- PROMO BENEFITS SECTION -->
+{{> promo-benefits }}
+
+{{> footer-short }}
 {{> body-close }}

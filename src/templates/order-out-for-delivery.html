@@ -1,79 +1,93 @@
-{{> head }}
-                      {{> header }}
-                      {{> container-open }}
+{% if fulfillment.item_count == item_count %}
+  {% capture email_title %}Your order is out for delivery{% endcapture %}
+  {% capture email_body %}Your order is out for delivery. Track your shipment to see the delivery status.{% endcapture %}
+{% elsif fulfillment.item_count > 1 %}
+  {% if fulfillment_status == 'fulfilled' %}
+    {% capture email_title %}The last items in your order are out for delivery{% endcapture %}
+    {% capture email_body %}The last items in your order are out for delivery. Track your shipment to see the delivery status.{% endcapture %}
+  {% else %}
+    {% capture email_title %}Some items in your order are out for delivery{% endcapture %}
+    {% capture email_body %}Some items in your order are out for delivery. Track your shipment to see the delivery status.{% endcapture %}
+  {% endif %}
+{% else %}
+  {% if fulfillment_status == 'fulfilled' %}
+    {% capture email_title %}The last item in your order is out for delivery{% endcapture %}
+    {% capture email_body %}The last item in your order is out for delivery. Track your shipment to see the delivery status.{% endcapture %}
+  {% else %}
+    {% capture email_title %}One item in your order is out for delivery{% endcapture %}
+    {% capture email_body %}One item in your order is out for delivery. Track your shipment to see the delivery status.{% endcapture %}
+  {% endif %}
+{% endif %}
 
-                      <!-- BEGIN: MAIN CONTENT -->
-                      <table
-                        class="sections_container"
-                        border="0"
-                        width="100%"
-                        cellpadding="0"
-                        cellspacing="0"
-                        align="center"
-                        style="min-width: 100%; direction: ltr"
-                        role="presentation"
-                      >
-                        <tr>
-                          <th
-                            class="section_border"
-                            style="mso-line-height-rule: exactly; padding: 45px 30px"
-                            bgcolor="#ffffff"
-                          >
-                            <table
-                              border="0"
-                              width="100%"
-                              cellpadding="0"
-                              cellspacing="0"
-                              align="center"
-                              style="min-width: 100%; direction: ltr"
-                              role="presentation"
-                            >
-                              <tr>
-                                <th
-                                  class="section_content"
-                                  style="
-                                    mso-line-height-rule: exactly;
-                                    direction: ltr;
-                                    font-family: Verdana, sans-serif, 'Montserrat';
-                                    font-size: 18px;
-                                    line-height: 28px;
-                                    font-weight: 400;
-                                    color: #333333;
-                                    padding: 8px 30px;
-                                  "
-                                  align="left"
-                                >
-<h2>{{ email_title }}</h2>
+{% capture email_emphasis %}Estimated delivery date: <strong>{{fulfillment.estimated_delivery_at | date: format: 'date'}}</strong>{% endcapture %}
+
+{{> head }}
+{{> header }}
+{{> container-open }}
+
+<!-- BEGIN: MAIN CONTENT -->
+<table
+  class="sections_container"
+  border="0"
+  width="100%"
+  cellpadding="0"
+  cellspacing="0"
+  align="center"
+  style="min-width: 100%; direction: ltr"
+  role="presentation"
+>
+  <tr>
+    <th
+      class="section_border"
+      style="mso-line-height-rule: exactly; padding: 45px 30px"
+      bgcolor="#ffffff"
+    >
+      <table
+        border="0"
+        width="100%"
+        cellpadding="0"
+        cellspacing="0"
+        align="center"
+        style="min-width: 100%; direction: ltr"
+        role="presentation"
+      >
+        <tr>
+          <th
+            class="section_content"
+            style="
+              mso-line-height-rule: exactly;
+              direction: ltr;
+              font-family: Verdana, sans-serif, 'Montserrat';
+              font-size: 18px;
+              line-height: 28px;
+              font-weight: 400;
+              color: #333333;
+            "
+            align="left"
+          >
+            <h2>{{ email_title }}</h2>
             <p>{{ email_body }}</p>
             {% if fulfillment.estimated_delivery_at %}
               <p>{{ email_emphasis }}</p>
             {% endif %}
-            {% if order_status_url %}
-              <table class="row actions">
-  <tr>
-    <td class="empty-line">&nbsp;
-                                </th>
-                              </tr>
-                            </table>
-                          </th>
-                        </tr>
-                      </table>
-                      <!-- END: MAIN CONTENT -->
-
-                      <!-- PROMO BENEFITS SECTION -->
-                      {{> promo-benefits }}
-
-                      {{> container-close }}
-
-                      {{> footer-short }}
-                    </th>
-                  </tr>
-                </tbody>
-              </table>
-            </center>
+            {% if tracking_number %}
+              <p>Tracking number: {{ tracking_number }}</p>
+              {% if tracking_url %}
+                <p><a href="{{ tracking_url }}">Track your shipment</a></p>
+              {% endif %}
+            {% endif %}
           </th>
         </tr>
-      </tbody>
-    </table>
-    <!-- END: CONTAINER -->
+      </table>
+    </th>
+  </tr>
+</table>
+<!-- END: MAIN CONTENT -->
+
+{{> container-close }}
+
+<!-- PROMO BENEFITS SECTION -->
+{{> promo-benefits }}
+
+{{> footer-short }}
 {{> body-close }}
